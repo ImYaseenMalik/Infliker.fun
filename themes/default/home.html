@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{{site_title}}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/themes/default/style.css">
+</head>
+<body class="bg-white text-slate-900">
+  <header class="max-w-4xl mx-auto p-6 flex justify-between">
+    <h1 class="text-2xl font-bold">{{site_title}}</h1>
+    <nav><a href="/blog.html" class="text-indigo-600">Blog</a></nav>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <div id="posts">Loading...</div>
+  </main>
+
+  <script>
+    async function fetchPosts(){
+      const res = await fetch('/api/posts');
+      const data = await res.json();
+      const posts = Array.isArray(data.results) ? data.results : data;
+      const html = posts.map(p => `<article class="mb-6"><h2 class="text-xl font-semibold"><a href="/blog.html?id=${p.id}">${p.title}</a></h2><p class="text-sm text-slate-500">${p.excerpt||''}</p></article>`).join('');
+      document.getElementById('posts').innerHTML = html;
+    }
+    fetchPosts();
+  </script>
+</body>
+</html>
