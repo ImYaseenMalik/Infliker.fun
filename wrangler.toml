@@ -1,6 +1,0 @@
-name = "infliker-landing"
-main = "public/index.html"
-compatibility_date = "2024-01-01"
-
-[pages]
-bucket = "public"
