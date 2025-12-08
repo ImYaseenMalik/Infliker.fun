@@ -1,6 +1,0 @@
-body{font-family: system-ui, Arial; margin:20px}
-header{display:flex;gap:12px;align-items:center}
-main{margin-top:20px}
-input,textarea{width:100%;max-width:800px;margin:6px 0;padding:8px}
-button{padding:8px 12px;margin:6px}
-article{border-bottom:1px solid #ddd;padding:8px 0}
