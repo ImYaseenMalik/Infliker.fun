@@ -36,30 +36,36 @@ document.getElementById('logout').onclick = () => {
 
 // POSTS
 const postsList = document.getElementById('postsList');
-async function loadPosts(){
-  show('posts');
-  postsList.innerHTML = 'Loading...';
-  try {
-    const posts = await apiFetch('/api/posts');
-    if (!posts || !Array.isArray(posts.results) && !Array.isArray(posts)) {
-      // older worker may return raw array or {results:[]}
+async function loadPosts() {
+    const res = await fetch("/api/posts", {
+        headers: {
+            "x-admin-key": localStorage.getItem("adminKey")
+        }
+    });
+
+    const data = await res.json();
+
+    if (!data.items || !Array.isArray(data.items)) {
+        console.error("API returned invalid items:", data);
+        alert("Error loading posts");
+        return;
     }
-    const items = Array.isArray(posts.results) ? posts.results : posts;
-    postsList.innerHTML = items.map(p=> `
-      <div class="p-4 border rounded bg-white">
-        <h4 class="font-semibold">${escapeHtml(p.title)}</h4>
-        <p class="text-sm text-slate-500">${escapeHtml(p.excerpt||'')}</p>
-        <div class="mt-2 flex gap-2">
-          <button data-id="${p.id}" class="editBtn bg-indigo-600 text-white px-2 py-1 rounded">Edit</button>
-          <button data-id="${p.id}" class="delBtn bg-red-600 text-white px-2 py-1 rounded">Delete</button>
-        </div>
-      </div>`).join('');
-    document.querySelectorAll('.editBtn').forEach(b => b.onclick = editHandler);
-    document.querySelectorAll('.delBtn').forEach(b => b.onclick = deleteHandler);
-  } catch (e) {
-    postsList.innerHTML = 'Error loading posts. ' + e.message;
-  }
+
+    const postsList = document.getElementById("posts-list");
+    postsList.innerHTML = "";
+
+    data.items.forEach(post => {
+        postsList.innerHTML += `
+            <div class="p-4 bg-white shadow mb-2 rounded">
+               <h3 class="font-bold">${post.title}</h3>
+               <p class="text-sm">${post.slug}</p>
+            </div>
+        `;
+    });
 }
+
+loadPosts();
+
 
 function escapeHtml(s=''){ return String(s).replaceAll('<','&lt;').replaceAll('>','&gt;'); }
 
