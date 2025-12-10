@@ -9,11 +9,24 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+try {
+    firebase.initializeApp(firebaseConfig);
+    console.log("Firebase initialized successfully");
+} catch (error) {
+    console.error("Firebase initialization error:", error);
+}
 
-// Initialize services (NO storage)
+// Initialize services
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Firebase Auth providers
+// Set Firestore settings (important for web)
+db.settings({ 
+    cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED 
+});
+
+// Google Auth Provider
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({
+    prompt: 'select_account'
+});
