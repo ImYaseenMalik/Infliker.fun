@@ -9,9 +9,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
-// Initialize services
+// Initialize services (NO storage)
 const auth = firebase.auth();
 const db = firebase.firestore();
-const storage = firebase.storage();
+
+// Firebase Auth providers
+const googleProvider = new firebase.auth.GoogleAuthProvider();
