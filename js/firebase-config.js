@@ -1,11 +1,11 @@
 // Replace with your Firebase config from Step 3
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAwNuq_h5KkDpm55RUYVGLkZnO3wRluYzs",
+  authDomain: "inflikercms.firebaseapp.com",
+  projectId: "inflikercms",
+  storageBucket: "inflikercms.firebasestorage.app",
+  messagingSenderId: "1035107054478",
+  appId: "1:1035107054478:web:a2a7851cf94a2ee8626adf"
 };
 
 // Initialize Firebase
