@@ -1,0 +1,9 @@
+name = "infliker-api"
+main = "src/index.js"
+compatibility_date = "2025-12-11"
+
+[build]
+command = "npm install && npm run build" # if you transpile
+
+[env.production]
+# optional env specific settings
