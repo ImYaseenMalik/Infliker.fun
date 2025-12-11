@@ -1,6 +1,19 @@
 name = "infliker-api"
 main = "src/index.js"
-compatibility_date = "2025-12-11"
+compatibility_date = "2025-02-04"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "infliker_db"
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "infliker-media"
+preview_bucket = true
+
+[[kv_namespaces]]
+binding = "KV"
+id = "b03a9683b9c8401fbaea09ce52b75342"
 
 [build]
 command = "npm install && npm run build" # if you transpile
